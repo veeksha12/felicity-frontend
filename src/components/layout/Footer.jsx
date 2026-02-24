@@ -22,7 +22,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center">
                 <img
-                  src="/public/logo.png"
+                  src="/logo.png"
                   alt="Felicity Logo"
                   className="w-12 h-12 object-contain"
                 />

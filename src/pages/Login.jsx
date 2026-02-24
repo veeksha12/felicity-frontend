@@ -71,7 +71,7 @@ const Login = () => {
           <div className="text-center mb-8">
             <div className="vinyl-record w-20 h-20 mx-auto mb-4 flex items-center justify-center">
               <img
-                src="/public/logo.png"
+                src="/logo.png"
                 alt="Felicity Logo"
                 className="w-12 h-12 object-contain"
               />

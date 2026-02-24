@@ -94,7 +94,7 @@ const Navbar = () => {
             >
               <div className="relative">
                 <img
-                  src="/public/logo.png"
+                  src="/logo.png"
                   alt="Felicity Logo"
                   className="w-12 h-12 object-contain transform group-hover:scale-110 transition-transform duration-300"
                 />
