@@ -203,7 +203,7 @@ const EventParticipants = () => {
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
                 placeholder="Search by name, email, or ticket ID..."
@@ -241,7 +241,7 @@ const EventParticipants = () => {
 
         {/* Participants Table */}
         <div className="bg-glass border border-white/10 rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
+          <div className="table-responsive">
             <table className="w-full">
               <thead className="bg-black/30">
                 <tr>

@@ -12,34 +12,7 @@ const AdminDashboard = () => {
   const [newOrganizerCreds, setNewOrganizerCreds] = useState(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-  // Admin password reset state
-  const [resetEmail, setResetEmail] = useState('');
-  const [resetNewPassword, setResetNewPassword] = useState('');
-  const [resetLoading, setResetLoading] = useState(false);
 
-  const handleResetUserPassword = async (e) => {
-    e.preventDefault();
-    if (!resetEmail || !resetNewPassword) {
-      toast.error('Email and new password are required');
-      return;
-    }
-    if (resetNewPassword.length < 6) {
-      toast.error('New password must be at least 6 characters');
-      return;
-    }
-    try {
-      setResetLoading(true);
-      const response = await adminAPI.resetUserPassword({ email: resetEmail, newPassword: resetNewPassword });
-      toast.success(response.data.message);
-      setResetEmail('');
-      setResetNewPassword('');
-    } catch (error) {
-      console.error('Reset password error:', error);
-      toast.error(error.response?.data?.message || 'Failed to reset password');
-    } finally {
-      setResetLoading(false);
-    }
-  };
 
   useEffect(() => {
     fetchOrganizers();
@@ -189,7 +162,7 @@ const AdminDashboard = () => {
           <div className="bg-glass border border-white/10 rounded-2xl p-8 mb-8">
             <h2 className="text-2xl font-display mb-6">Create New Organizer</h2>
             <form onSubmit={handleSubmit(onCreateOrganizer)} className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
                     First Name <span className="text-red-400">*</span>
@@ -319,53 +292,6 @@ const AdminDashboard = () => {
           <AdminPasswordResetManagement />
         </div>
 
-        {/* Reset User Password Section */}
-        <div className="mt-8 bg-glass border border-white/10 rounded-2xl p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <Key size={24} className="text-disco-pink" />
-            <h2 className="text-2xl font-display">Reset User Password</h2>
-          </div>
-          <p className="text-gray-400 text-sm mb-6">
-            Reset the password for any participant or organizer by entering their email address.
-          </p>
-          <form onSubmit={handleResetUserPassword} className="space-y-4 max-w-md">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                User Email <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="email"
-                value={resetEmail}
-                onChange={(e) => setResetEmail(e.target.value)}
-                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg focus:outline-none focus:border-disco-pink"
-                placeholder="participant@example.com"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                New Password <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="password"
-                value={resetNewPassword}
-                onChange={(e) => setResetNewPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-lg focus:outline-none focus:border-disco-pink"
-                placeholder="Minimum 6 characters"
-                minLength={6}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={resetLoading}
-              className="btn-retro py-3 px-6 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <Key size={16} />
-              {resetLoading ? 'Resetting...' : 'Reset Password'}
-            </button>
-          </form>
-        </div>
 
         {/* Organizers List */}
         <div className="bg-glass border border-white/10 rounded-2xl p-8">
@@ -378,10 +304,10 @@ const AdminDashboard = () => {
                   key={org._id}
                   className="bg-black/30 border border-white/10 rounded-lg p-6 hover:border-disco-pink/50 transition-all"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold truncate">
                           {org.firstName} {org.lastName}
                         </h3>
                         {org.category && (
@@ -408,10 +334,10 @@ const AdminDashboard = () => {
                       )}
                     </div>
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 justify-end">
                       <button
                         onClick={() => handleToggleArchive(org._id, org.isArchived)}
-                        className={`p-2 rounded-lg transition-colors ${org.isArchived
+                        className={`p-2 rounded-lg transition-colors flex-shrink-0 ${org.isArchived
                           ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-400'
                           : 'bg-glass border border-white/10 hover:bg-white/5 text-gray-400'
                           }`}
@@ -421,7 +347,7 @@ const AdminDashboard = () => {
                       </button>
                       <button
                         onClick={() => handleToggleActive(org._id, org.isActive)}
-                        className={`p-2 rounded-lg transition-colors ${org.isActive
+                        className={`p-2 rounded-lg transition-colors flex-shrink-0 ${org.isActive
                           ? 'bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400'
                           : 'bg-green-500/20 hover:bg-green-500/30 text-green-400'
                           }`}
@@ -431,7 +357,7 @@ const AdminDashboard = () => {
                       </button>
                       <button
                         onClick={() => handleDeleteOrganizer(org._id, `${org.firstName} ${org.lastName}`)}
-                        className="p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors"
+                        className="p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg transition-colors flex-shrink-0"
                         title="Delete"
                       >
                         <Trash2 size={20} />
@@ -448,7 +374,7 @@ const AdminDashboard = () => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

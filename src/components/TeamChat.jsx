@@ -4,6 +4,7 @@ import { Send, Image, Paperclip, MoreVertical, X } from 'lucide-react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '../store/useStore';
+import { chatAPI } from '../services/api';
 
 const TeamChat = ({ teamId, teamName, members = [] }) => {
     const { user, token } = useAuthStore();
@@ -25,25 +26,7 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
     // Fetch team members
     useEffect(() => {
         const fetchMembers = async () => {
-            // We can get members from the team details. 
-            // Since we don't have a direct "get members" API here, we can rely on the parent component passing it 
-            // or fetch the team details again. 
-            // The API getTeamByInviteCode exists, but we have teamId here.
-            // We can use api.get('/teams/my-teams') but that returns all.
-            // Let's assume we can pass `members` as a prop or fetch it.
-            // For now, let's fetch the chat history which includes sender details, 
-            // but that doesn't give us all members (some might not have chatted).
-            // Let's fetch the specific team details using a new endpoint or reusing.
-            // Actually, `MyTeams.jsx` has the team object with members! We should pass it as a prop.
-            // But for now, let's fetch it if not passed.
             try {
-                // Determine if we can get team details. 
-                // Let's try to get it from the chat history endpoint if we modify it to return members?
-                // Or better, let's just use the `teamsAPI.get(teamId)` if it existed.
-                // Since I cannot easily change the props passed from MyTeams (it's in the same file as TeamChat usually or close),
-                // let's look at MyTeams.jsx again. It passes `teamId` and `teamName`.
-                // I'll update MyTeams.jsx to pass `members` prop in the next step.
-                // For now, I'll set up the state.
             } catch (err) {
                 console.error(err);
             }
@@ -76,6 +59,11 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
         newSocket.on('new_team_message', (message) => {
             console.log('New message received:', message);
             setMessages((prev) => [...prev, message]);
+
+            // Mark as read if user is currently watching the chat
+            if (message.sender?._id !== user?._id && message.sender !== user?._id) {
+                chatAPI.markAsRead(teamId).catch(err => console.error('Failed to mark real-time message as read:', err));
+            }
         });
 
         // Initial online users list
@@ -127,8 +115,6 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
         const fetchHistory = async () => {
             try {
                 setLoadingHistory(true);
-                // We'll need to add a corresponding API method in services/api.js or call axios directly
-                // For now let's assume api.get works
                 const response = await api.get(`/chat/history/${teamId}`);
                 if (response.data && response.data.messages) {
                     setMessages(response.data.messages); // Removed reverse() to keep chronological order (oldest -> newest)
@@ -137,6 +123,7 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
                 console.error('Failed to load history:', error);
             } finally {
                 setLoadingHistory(false);
+                chatAPI.markAsRead(teamId).catch(err => console.error('Failed to mark history as read:', err));
             }
         };
 
@@ -192,7 +179,7 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
 
             socket.emit('send_team_message', {
                 teamId,
-                message: filename, // Use filename as message text for files
+                message: filename, 
                 type,
                 fileUrl
             });
@@ -211,7 +198,6 @@ const TeamChat = ({ teamId, teamName, members = [] }) => {
         setNewMessage(e.target.value);
         if (socket) {
             socket.emit('typing', { teamId, isTyping: true });
-            // Debounce stop typing (simplified)
             setTimeout(() => socket.emit('typing', { teamId, isTyping: false }), 3000);
         }
     };

@@ -137,9 +137,9 @@ const EventDetail = () => {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Hero Image */}
-            <div className="relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-disco-purple to-disco-pink">
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <h1 className="text-5xl font-display text-center px-8">{event.eventName}</h1>
+            <div className="relative h-64 sm:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-disco-purple to-disco-pink">
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center p-4">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-display text-center">{event.eventName}</h1>
               </div>
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className={`px-4 py-2 ${statusColor} text-white rounded-full`}>
@@ -608,7 +608,6 @@ const EventDetail = () => {
         maxTeamSize={event.maxTeamSize}
         onTeamCreated={(team) => {
           setMyTeam(team);
-          // Don't close immediately so they can copy link
         }}
       />
 

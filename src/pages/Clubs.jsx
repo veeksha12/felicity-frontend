@@ -108,7 +108,7 @@ const Clubs = () => {
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative max-w-2xl">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <Search className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search clubs by name, description, or category"

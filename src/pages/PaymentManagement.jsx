@@ -122,7 +122,7 @@ const PaymentManagement = () => {
                 <div className="bg-glass border border-white/10 rounded-lg p-6 mb-6">
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                            <Search className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                             <input
                                 type="text"
                                 placeholder="Search by name, email, or ticket ID..."
@@ -148,7 +148,7 @@ const PaymentManagement = () => {
 
                 {/* Table */}
                 <div className="bg-glass border border-white/10 rounded-lg overflow-hidden">
-                    <div className="overflow-x-auto">
+                    <div className="table-responsive">
                         <table className="w-full">
                             <thead className="bg-black/30">
                                 <tr>
@@ -170,8 +170,8 @@ const PaymentManagement = () => {
                                         <td className="px-6 py-4 font-mono text-sm text-disco-pink">{p.ticketId}</td>
                                         <td className="px-6 py-4">
                                             <span className={`px-3 py-1 rounded-full text-xs font-medium ${p.paymentStatus === 'Completed' ? 'bg-green-500/20 text-green-400' :
-                                                    p.paymentStatus === 'Pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                                                        'bg-red-500/20 text-red-400'
+                                                p.paymentStatus === 'Pending' ? 'bg-yellow-500/20 text-yellow-400' :
+                                                    'bg-red-500/20 text-red-400'
                                                 }`}>
                                                 {p.paymentStatus}
                                             </span>

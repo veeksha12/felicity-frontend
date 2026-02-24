@@ -42,12 +42,10 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
 
       reset();
 
-      // Call onSuccess callback if provided
       if (onSuccess) {
         onSuccess(response.data.organizer);
       }
 
-      // Clear success message after 5 seconds
       setTimeout(() => setMessage({ type: '', text: '' }), 5000);
     } catch (error) {
       console.error('Error creating organizer:', error);
@@ -78,13 +76,11 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Required Fields Section */}
         <div className="space-y-6">
           <h3 className="text-lg font-semibold text-gray-700 border-b pb-2">
             Required Information
           </h3>
 
-          {/* Organizer Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Organizer Name <span className="text-red-500">*</span>
@@ -110,7 +106,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
             )}
           </div>
 
-          {/* Last Name (Optional but recommended) */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Last Name (Optional)
@@ -126,7 +121,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
             </div>
           </div>
 
-          {/* Category */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Category <span className="text-red-500">*</span>
@@ -154,7 +148,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
             </p>
           </div>
 
-          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Description <span className="text-red-500">*</span>
@@ -185,7 +178,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
             <p className="mt-1 text-sm text-gray-500">20-500 characters. Be descriptive and engaging!</p>
           </div>
 
-          {/* Contact Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Contact Email <span className="text-red-500">*</span>
@@ -215,11 +207,9 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
           </div>
         </div>
 
-        {/* Account Credentials Section */}
         <div className="space-y-6 pt-6 border-t">
           <h3 className="text-lg font-semibold text-gray-700">Account Credentials</h3>
 
-          {/* Login Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Login Email <span className="text-red-500">*</span>
@@ -248,7 +238,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
             </p>
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Password <span className="text-red-500">*</span>
@@ -276,11 +265,9 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
           </div>
         </div>
 
-        {/* Optional Features Section */}
         <div className="space-y-6 pt-6 border-t">
           <h3 className="text-lg font-semibold text-gray-700">Optional Features</h3>
 
-          {/* Discord Webhook */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Discord Webhook URL (Optional)
@@ -309,7 +296,6 @@ const AdminCreateOrganizer = ({ onSuccess }) => {
           </div>
         </div>
 
-        {/* Submit Button */}
         <div className="pt-6">
           <button
             type="submit"

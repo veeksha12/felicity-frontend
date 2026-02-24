@@ -22,14 +22,14 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log('🔐 Login attempt with:', { email: data.email }); // Debug
+    console.log(' Login attempt with:', { email: data.email }); // Debug
 
     try {
       setLoading(true);
-      console.log('📡 Calling API...'); // Debug
+      console.log(' Calling API...'); // Debug
 
       const response = await authAPI.login({ ...data, captchaToken });
-      console.log('✅ Login successful:', response.data); // Debug
+      console.log(' Login successful:', response.data); // Debug
 
       login(response.data.user, response.data.token);
       toast.success('Welcome back!');
@@ -44,7 +44,7 @@ const Login = () => {
         navigate('/dashboard');
       }
     } catch (error) {
-      console.error('❌ Login error:', error); // Debug
+      console.error(' Login error:', error); // Debug
       console.error('Error response:', error.response); // Debug
 
       const errorMessage = error.response?.data?.message || 'Login failed. Please try again.';
@@ -70,7 +70,11 @@ const Login = () => {
         <div className="bg-glass border border-white/10 rounded-2xl p-8 shadow-disco">
           <div className="text-center mb-8">
             <div className="vinyl-record w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <span className="text-3xl font-bold">F</span>
+              <img
+                src="/public/logo.png"
+                alt="Felicity Logo"
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <h1 className="text-3xl font-display text-gradient mb-2">Welcome Back</h1>
             <p className="text-gray-400">Login to your Felicity account</p>
@@ -81,7 +85,7 @@ const Login = () => {
               <label className="block text-sm font-medium mb-2">Email</label>
               <div className="relative">
                 <Mail
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                   size={20}
                 />
                 <input
@@ -104,26 +108,35 @@ const Login = () => {
 
             <div>
               <label className="block text-sm font-medium mb-2">Password</label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
+              <div className="relative group">
+                {/* Left Icon (Lock) */}
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock
+                    className="text-gray-400 group-focus-within:text-disco-pink transition-colors"
+                    size={20}
+                  />
+                </div>
+
+                {/* Input Field - Balanced Padding */}
                 <input
                   type={showPassword ? 'text' : 'password'}
                   {...register('password', {
                     required: 'Password is required',
                   })}
-                  className="w-full pl-12 pr-12 py-3 bg-black/50 border border-white/10 rounded-lg focus:outline-none focus:border-disco-pink transition-colors"
+                  className="w-full pl-10 pr-10 py-3 bg-black/50 border border-white/10 rounded-lg focus:outline-none focus:border-disco-pink transition-colors placeholder:text-gray-600"
                   placeholder="••••••••"
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+
+                {/* Right Icon (Eye Button) - Symmetrical to the Lock */}
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-gray-400 hover:text-white focus:outline-none transition-colors"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-400">{errors.password.message}</p>

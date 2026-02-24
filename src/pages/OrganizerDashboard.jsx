@@ -109,13 +109,6 @@ const OrganizerDashboard = () => {
           <h1 className="text-4xl font-display text-gradient">My Events</h1>
           <div className="flex gap-4">
             <button
-              onClick={() => navigate('/organizer/password-reset')}
-              className="px-6 py-3 border border-white/20 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2"
-            >
-              <Key size={20} />
-              Password Reset
-            </button>
-            <button
               onClick={() => navigate('/create-event')}
               className="btn-retro px-6 py-3"
             >
@@ -162,7 +155,7 @@ const OrganizerDashboard = () => {
                 {/* Event Header */}
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-display text-white mb-2">
+                    <h3 className="text-xl font-display text-white mb-2 line-clamp-1" title={event.eventName}>
                       {event.eventName}
                     </h3>
                     {getStatusBadge(event.status)}
@@ -193,9 +186,7 @@ const OrganizerDashboard = () => {
                   </div>
                 </div>
 
-                {/* ✅ FIXED: Actions with correct paths */}
                 <div className="grid grid-cols-2 gap-2 mb-2">
-                  {/* View Button - FIXED PATH */}
                   <button
                     onClick={() => navigate(`/events/${event._id}`)}
                     className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg flex items-center justify-center gap-2 transition-colors"
@@ -205,7 +196,6 @@ const OrganizerDashboard = () => {
                     <span className="text-sm">View</span>
                   </button>
 
-                  {/* Participants - FIXED PATH */}
                   <Link
                     to={`/event/${event._id}/participants`}
                     className="px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-lg flex items-center justify-center gap-2 transition-colors"
@@ -215,7 +205,6 @@ const OrganizerDashboard = () => {
                     <span className="text-sm">Participants</span>
                   </Link>
 
-                  {/* Edit Button - Visible for Draft and Published */}
                   {['Draft', 'Published'].includes(event.status) && (
                     <button
                       onClick={() => navigate(`/edit-event/${event._id}`)}
@@ -227,7 +216,6 @@ const OrganizerDashboard = () => {
                     </button>
                   )}
 
-                  {/* Lifecycle Transitions */}
                   {event.status === 'Draft' && (
                     <button
                       onClick={() => handlePublish(event._id)}

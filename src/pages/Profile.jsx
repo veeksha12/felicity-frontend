@@ -165,7 +165,7 @@ const Profile = () => {
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="email"
                   value={user?.email || ''}
@@ -182,7 +182,7 @@ const Profile = () => {
                 Contact Number {user?.role === 'Participant' && <span className="text-red-400">*</span>}
               </label>
               <div className="relative">
-                <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Phone className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="tel"
                   {...register('contactNumber', {
@@ -210,7 +210,7 @@ const Profile = () => {
                   College/Organization <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
-                  <Building className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <Building className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
                     type="text"
                     {...register('collegeName', {
@@ -270,7 +270,7 @@ const Profile = () => {
                     <span className="text-gray-400 text-xs ml-2">(optional)</span>
                   </label>
                   <div className="relative">
-                    <LinkIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <LinkIcon className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="url"
                       {...register('discordWebhook', {
@@ -339,7 +339,7 @@ const Profile = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Current Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Lock className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="password"
                       value={passwordData.currentPassword}
@@ -354,7 +354,7 @@ const Profile = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">New Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Lock className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="password"
                       value={passwordData.newPassword}
@@ -370,7 +370,7 @@ const Profile = () => {
                 <div>
                   <label className="block text-sm font-medium mb-2">Confirm New Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <Lock className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="password"
                       value={passwordData.confirmNewPassword}
@@ -415,7 +415,6 @@ const Profile = () => {
           </div>
         )}
 
-        {/* Password Reset Request (Organizers only) */}
         {user?.role === 'Organizer' && (
           <PasswordResetRequest />
         )}

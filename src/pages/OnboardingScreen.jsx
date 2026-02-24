@@ -62,7 +62,7 @@ const OnboardingScreen = () => {
                 followedClubs: selectedClubs
             });
 
-            toast.success('Welcome to Felicity! 🎉');
+            toast.success('Welcome to Felicity! ');
             navigate('/dashboard');
         } catch (error) {
             console.error('Complete onboarding error:', error);

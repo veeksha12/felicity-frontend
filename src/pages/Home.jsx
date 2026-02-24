@@ -214,7 +214,7 @@ const Home = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-disco-pink transition-colors">
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-disco-pink transition-colors line-clamp-1" title={event.eventName}>
                       {event.eventName}
                     </h3>
 
@@ -280,7 +280,7 @@ const Home = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-disco-cyan transition-colors">
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-disco-cyan transition-colors line-clamp-1" title={event.eventName}>
                       {event.eventName}
                     </h3>
 
@@ -330,10 +330,6 @@ const Home = () => {
             </h2>
 
             <div className="h-6" />
-
-            {/* <h2 className="text-xl mb-8 max-w-2xl mx-auto">
-              Join thousands of students in celebrating art, culture, and creativity
-            </h2> */}
 
             <h2 className="text-4xl md:text-5xl font-medium">
               Join thousands of students in celebrating art, culture, and creativity

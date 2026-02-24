@@ -39,11 +39,9 @@ const TicketView = () => {
     canvas.width = 800;
     canvas.height = 1000;
 
-    // Background
     ctx.fillStyle = '#1a1a2e';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Header
     ctx.fillStyle = '#ec4899';
     ctx.fillRect(0, 0, canvas.width, 100);
     
@@ -52,7 +50,6 @@ const TicketView = () => {
     ctx.textAlign = 'center';
     ctx.fillText('FELICITY EVENT TICKET', canvas.width / 2, 60);
 
-    // Event details
     ctx.fillStyle = 'white';
     ctx.font = '24px Arial';
     ctx.textAlign = 'left';
@@ -62,19 +59,16 @@ const TicketView = () => {
     ctx.fillText(`Venue: ${ticket.event.venue}`, 50, 330);
     ctx.fillText(`Ticket ID: ${ticket.ticketId}`, 50, 380);
 
-    // QR Code
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       ctx.drawImage(img, 250, 450, 300, 300);
       
-      // Footer
       ctx.fillStyle = '#ec4899';
       ctx.font = '18px Arial';
       ctx.textAlign = 'center';
       ctx.fillText('Scan this QR code at the venue', canvas.width / 2, 830);
 
-      // Download
       const link = document.createElement('a');
       link.download = `felicity-ticket-${ticket.ticketId}.png`;
       link.href = canvas.toDataURL();
@@ -116,7 +110,6 @@ const TicketView = () => {
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-3xl">
-        {/* Header */}
         <button
           onClick={() => navigate('/my-events')}
           className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
@@ -125,7 +118,6 @@ const TicketView = () => {
           Back to My Events
         </button>
 
-        {/* Ticket Card */}
         <div className="bg-gradient-to-br from-disco-purple to-disco-pink rounded-3xl p-8 mb-6 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/30" />
           <div className="relative z-10">
@@ -220,7 +212,6 @@ const TicketView = () => {
           </div>
         </div>
 
-        {/* QR Code */}
         {ticket.qrCode && (
           <div className="bg-glass border border-white/10 rounded-2xl p-8 mb-6">
             <h3 className="text-xl font-display text-center mb-4">Entry QR Code</h3>
@@ -239,7 +230,6 @@ const TicketView = () => {
           </div>
         )}
 
-        {/* Action Buttons */}
         <div className="flex gap-4">
           <button
             onClick={downloadTicket}
@@ -250,7 +240,6 @@ const TicketView = () => {
           </button>
         </div>
 
-        {/* Important Notice */}
         <div className="mt-8 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
           <p className="text-sm text-yellow-400 flex items-start gap-2">
             <span className="text-xl">⚠️</span>

@@ -33,7 +33,6 @@ const Navbar = () => {
     { path: '/events', label: 'Events' },
   ];
 
-  // Build user menu items based on role
   const userMenuItems = [];
   if (user) {
     if (user.role === 'Organizer') {
@@ -88,41 +87,28 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
             <Link
               to="/"
               className="flex items-center space-x-3 group"
               onClick={closeMobileMenu}
             >
               <div className="relative">
-                {/* Actual logo image */}
                 <img
-                  src="/logo.png"
+                  src="/public/logo.png"
                   alt="Felicity Logo"
-                  className="w-12 h-12 rounded-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-                  onError={(e) => {
-                    // Fallback if image doesn't load
-                    e.target.style.display = 'none';
-                    e.target.nextElementSibling.style.display = 'flex';
-                  }}
+                  className="w-12 h-12 object-contain transform group-hover:scale-110 transition-transform duration-300"
                 />
-
-                {/* Fallback gradient circle (shown only if image fails) */}
-                <div className="hidden w-12 h-12 rounded-full bg-gradient-disco items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl font-bold">F</span>
-                </div>
 
                 <div className="absolute inset-0 rounded-full bg-gradient-disco opacity-50 blur-lg group-hover:opacity-75 transition-opacity" />
               </div>
-              <div>
-                <span className="text-2xl font-display tracking-wider text-gradient">
+              <div className="hidden xs:block">
+                <span className="text-xl sm:text-2xl font-display tracking-wider text-gradient">
                   FELICITY
                 </span>
-                <div className="text-xs text-gray-400 -mt-1">IIIT HYDERABAD</div>
+                <div className="text-[10px] sm:text-xs text-gray-400 -mt-1 uppercase tracking-tighter">IIIT HYDERABAD</div>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -153,7 +139,6 @@ const Navbar = () => {
                     <span className="text-sm font-medium">{user.firstName}</span>
                   </button>
 
-                  {/* Dropdown Menu */}
                   <div className="absolute right-0 mt-2 w-56 bg-gray-900 border border-disco-pink/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
                     <div className="p-4 border-b border-gray-800">
                       <p className="font-medium">{user.firstName} {user.lastName}</p>
@@ -202,7 +187,6 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
               className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -213,7 +197,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -240,8 +223,8 @@ const Navbar = () => {
                 {isAuthenticated ? (
                   <>
                     <div className="py-4 border-b border-gray-800">
-                      <p className="font-medium text-lg">{user.firstName} {user.lastName}</p>
-                      <p className="text-sm text-gray-400 mt-1">{user.email}</p>
+                      <p className="font-medium text-lg truncate">{user.firstName} {user.lastName}</p>
+                      <p className="text-sm text-gray-400 mt-1 truncate">{user.email}</p>
                     </div>
 
                     {userMenuItems.map((item) => (

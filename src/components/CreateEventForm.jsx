@@ -177,10 +177,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
-          {/* ============================================ */}
-          {/* BASIC INFORMATION */}
-          {/* ============================================ */}
-
           <section className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">
               Basic Information
@@ -269,10 +265,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
               )}
             </div>
           </section>
-
-          {/* ============================================ */}
-          {/* DATES AND CAPACITY */}
-          {/* ============================================ */}
 
           <section className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">
@@ -396,10 +388,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
             </div>
           </section>
 
-          {/* ============================================ */}
-          {/* EVENT TAGS */}
-          {/* ============================================ */}
-
           <section className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">
               Event Tags <span className="text-red-500">*</span>
@@ -438,10 +426,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
             </button>
             <p className="text-sm text-gray-500">At least one tag is required. Tags help participants find your event.</p>
           </section>
-
-          {/* ============================================ */}
-          {/* NORMAL EVENT: CUSTOM REGISTRATION FORM */}
-          {/* ============================================ */}
 
           {watchEventType === 'Normal' && (
             <section className="space-y-6">
@@ -598,10 +582,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
             </section>
           )}
 
-          {/* ============================================ */}
-          {/* MERCHANDISE EVENT: VARIANTS */}
-          {/* ============================================ */}
-
           {watchEventType === 'Merchandise' && (
             <section className="space-y-6">
               <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">
@@ -718,10 +698,6 @@ const CreateEventForm = ({ eventType = 'Normal', onSuccess }) => {
               </div>
             </section>
           )}
-
-          {/* ============================================ */}
-          {/* OPTIONAL DETAILS */}
-          {/* ============================================ */}
 
           <section className="space-y-6">
             <h2 className="text-xl font-semibold text-gray-800 border-b pb-2">

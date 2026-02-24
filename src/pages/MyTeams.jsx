@@ -12,6 +12,12 @@ const MyTeams = () => {
 
     useEffect(() => {
         loadTeams();
+        const handleNewMessage = () => {
+            loadTeams();
+        };
+
+        window.addEventListener('new_team_message', handleNewMessage);
+        return () => window.removeEventListener('new_team_message', handleNewMessage);
     }, []);
 
     const loadTeams = async () => {
@@ -68,7 +74,9 @@ const MyTeams = () => {
     return (
         <div className="min-h-screen pt-24 pb-12 px-4">
             <div className="container mx-auto max-w-5xl">
-                <h1 className="text-4xl font-display text-gradient mb-8">My Teams</h1>
+                <h1 className="text-4xl font-display text-gradient border-b border-white/10 pb-4 mb-8">
+                    My Teams
+                </h1>
 
                 {teams.length === 0 ? (
                     <div className="text-center py-16 bg-glass border border-white/10 rounded-2xl">
@@ -86,7 +94,7 @@ const MyTeams = () => {
                     <div className="grid gap-6">
                         {teams.map((team) => (
                             <div key={team._id} className="bg-glass border border-white/10 rounded-2xl p-6 relative group overflow-hidden">
-                                <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl md:text-8xl font-display text-white pointer-events-none group-hover:scale-110 transition-transform select-none">
+                                <div className="absolute top-6 right-2 p-1 opacity-10 text-2xl md:text-4xl font-display text-white pointer-events-none group-hover:scale-110 transition-transform select-none">
                                     {team.inviteCode}
                                 </div>
 
@@ -94,7 +102,12 @@ const MyTeams = () => {
                                     <div className="flex flex-col md:flex-row justify-between md:items-start gap-4 mb-6">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
-                                                <h2 className="text-2xl font-bold text-white">{team.teamName}</h2>
+                                                <h2 className="text-2xl font-bold text-white line-clamp-1" title={team.teamName}>{team.teamName}</h2>
+                                                {team.unreadCount > 0 && (
+                                                    <span className="flex items-center justify-center bg-disco-pink text-white text-[10px] font-bold h-5 min-w-[20px] px-1.5 rounded-full animate-pulse">
+                                                        {team.unreadCount}
+                                                    </span>
+                                                )}
                                                 <span className={`px-3 py-1 rounded-full text-xs font-medium border ${team.status === 'Complete'
                                                     ? 'bg-green-500/20 border-green-500/30 text-green-400'
                                                     : team.status === 'Disbanded'

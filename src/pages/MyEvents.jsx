@@ -8,10 +8,10 @@ import toast from 'react-hot-toast';
 const MyEvents = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
-  const [events, setEvents] = useState({ 
-    all: [], 
-    upcoming: [], 
-    completed: [], 
+  const [events, setEvents] = useState({
+    all: [],
+    upcoming: [],
+    completed: [],
     cancelled: [],
     normal: [],
     merchandise: []
@@ -78,11 +78,10 @@ const MyEvents = () => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-6 py-3 rounded-lg transition-all whitespace-nowrap ${
-                activeTab === tab.key
+              className={`px-6 py-3 rounded-lg transition-all whitespace-nowrap ${activeTab === tab.key
                   ? 'bg-gradient-disco text-white shadow-disco'
                   : 'bg-glass hover:bg-white/10'
-              }`}
+                }`}
             >
               {tab.label} ({events[tab.key]?.length || 0})
             </button>
@@ -99,8 +98,8 @@ const MyEvents = () => {
         ) : displayEvents.length > 0 ? (
           <div className="grid gap-4">
             {displayEvents.map((reg) => (
-              <div 
-                key={reg._id} 
+              <div
+                key={reg._id}
                 className="bg-glass border border-white/10 rounded-lg p-6 hover:border-disco-pink/50 transition-all"
               >
                 <div className="flex flex-col lg:flex-row justify-between gap-4">
@@ -108,7 +107,9 @@ const MyEvents = () => {
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h3 className="text-xl font-bold mb-2">{reg.event?.eventName}</h3>
+                        <h3 className="text-xl font-bold mb-2 line-clamp-1" title={reg.event?.eventName}>
+                          {reg.event?.eventName}
+                        </h3>
                         <div className="flex flex-wrap gap-3 text-sm text-gray-400">
                           <span className="flex items-center gap-1">
                             <Calendar size={16} />

@@ -68,7 +68,11 @@ const Register = () => {
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="vinyl-record w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <span className="text-3xl font-bold">F</span>
+              <img
+                src="/public/logo.png"
+                alt="Felicity Logo"
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <h1 className="text-3xl font-display text-gradient mb-2">Join Felicity</h1>
             <p className="text-gray-400">Create your account and start exploring events</p>
@@ -110,12 +114,12 @@ const Register = () => {
             </div>
 
             {/* Name Fields */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium mb-2">First Name</label>
                 <div className="relative">
                   <User
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                     size={20}
                   />
                   <input
@@ -134,7 +138,7 @@ const Register = () => {
                 <label className="block text-sm font-medium mb-2">Last Name</label>
                 <div className="relative">
                   <User
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                     size={20}
                   />
                   <input
@@ -155,7 +159,7 @@ const Register = () => {
               <label className="block text-sm font-medium mb-2">Email</label>
               <div className="relative">
                 <Mail
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                   size={20}
                 />
                 <input
@@ -187,7 +191,7 @@ const Register = () => {
               </label>
               <div className="relative">
                 <Phone
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                   size={20}
                 />
                 <input
@@ -218,7 +222,7 @@ const Register = () => {
                 </label>
                 <div className="relative">
                   <Building
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                     size={20}
                   />
                   <input
@@ -241,7 +245,7 @@ const Register = () => {
               <label className="block text-sm font-medium mb-2">Password</label>
               <div className="relative">
                 <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400"
                   size={20}
                 />
                 <input
@@ -259,7 +263,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                  className="absolute right-1 top-1 transform -translate-y-1/2 text-gray-400 hover:text-white"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -306,10 +310,6 @@ const Register = () => {
           </div>
         </div>
 
-        {/* Additional Info */}
-        <div className="mt-6 text-center text-sm text-gray-400">
-          <p>By registering, you agree to our Terms of Service and Privacy Policy</p>
-        </div>
       </motion.div>
     </div>
   );

@@ -22,14 +22,11 @@ const GlobalChatListener = () => {
         socket.on('new_notification', (data) => {
             console.log('New notification received:', data);
 
-            // Play notification sound if desired (optional)
-
-            // Show toast
+            window.dispatchEvent(new CustomEvent('new_team_message', { detail: data }));
             toast((t) => (
                 <div
                     onClick={() => {
                         toast.dismiss(t.id);
-                        // Navigation could happen here if we used useNavigate
                         window.location.href = `/my-teams`;
                     }}
                     className="cursor-pointer"

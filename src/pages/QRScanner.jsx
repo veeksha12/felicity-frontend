@@ -10,22 +10,18 @@ const QRScanner = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
 
-  // Tab: 'scanner' | 'manual'
   const [activeTab, setActiveTab] = useState('scanner');
 
-  // Scanner state
   const [scanning, setScanning] = useState(false);
   const [lastScan, setLastScan] = useState(null);
   const scannerRef = useRef(null);
   const html5QrcodeScannerRef = useRef(null);
 
-  // Dashboard / participant state
   const [stats, setStats] = useState({ total: 0, attended: 0, notAttended: 0 });
   const [scanHistory, setScanHistory] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [loadingParticipants, setLoadingParticipants] = useState(false);
 
-  // Manual entry state
   const [manualSearch, setManualSearch] = useState('');
   const [togglingId, setTogglingId] = useState(null);
 
@@ -66,7 +62,6 @@ const QRScanner = () => {
     }
   };
 
-  // ---------- QR Scanner ----------
   const startScanning = () => {
     setScanning(true);
     setTimeout(() => {
@@ -102,7 +97,6 @@ const QRScanner = () => {
         toast.success(`✓ ${data.registration.participant.name}`);
         setStats(prev => ({ ...prev, attended: prev.attended + 1, notAttended: prev.notAttended - 1 }));
         setScanHistory(prev => [{ ticketId: data.registration.ticketId, participantName: data.registration.participant.name, attendanceTime: new Date(), manualOverride: null }, ...prev.slice(0, 9)]);
-        // Refresh participant list to reflect new state
         loadDashboard();
       } else {
         const isDuplicate = data.duplicate || data.message?.toLowerCase().includes('already');
@@ -124,7 +118,6 @@ const QRScanner = () => {
     if (!error.includes('NotFoundException')) console.error('QR Scan error:', error);
   };
 
-  // ---------- Manual Entry ----------
   const toggleAttendance = async (participant) => {
     const action = participant.attendanceMarked ? 'unmark' : 'mark';
     setTogglingId(participant._id);
@@ -142,7 +135,6 @@ const QRScanner = () => {
       const data = await response.json();
       if (response.ok) {
         toast.success(`${action === 'mark' ? '✓ Marked' : '↩ Unmarked'}: ${participant.participant.name}`);
-        // Update local participant state immediately for snappy UX
         setParticipants(prev => prev.map(p =>
           p._id === participant._id
             ? { ...p, attendanceMarked: action === 'mark', status: action === 'mark' ? 'Attended' : 'Confirmed', attendanceTime: action === 'mark' ? new Date() : null }
@@ -169,7 +161,6 @@ const QRScanner = () => {
     return !q || p.participant.name.toLowerCase().includes(q) || p.ticketId?.toLowerCase().includes(q) || p.participant.email?.toLowerCase().includes(q);
   });
 
-  // ---------- Export ----------
   const exportAttendance = async () => {
     try {
       const response = await fetch(`${API_BASE}/attendance/export/${eventId}`, {
@@ -323,7 +314,6 @@ const QRScanner = () => {
           </div>
         )}
 
-        {/* ===== MANUAL ENTRY TAB ===== */}
         {activeTab === 'manual' && (
           <div className="bg-glass border border-white/10 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-5">
@@ -338,7 +328,7 @@ const QRScanner = () => {
 
             {/* Search */}
             <div className="relative mb-5">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <Search className="absolute left-1 top-1 -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
                 placeholder="Search by name, ticket ID, or email…"

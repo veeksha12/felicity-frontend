@@ -24,13 +24,13 @@ const Dashboard = () => {
     try {
       const response = await registrationsAPI.getMyEvents();
       const data = response.data;
-      
+
       setStats({
         upcoming: data.upcoming?.length || 0,
         completed: data.completed?.length || 0,
         total: data.all?.length || 0,
       });
-      
+
       setUpcomingEvents(data.upcoming?.slice(0, 5) || []);
     } catch (error) {
       toast.error('Failed to load dashboard data');
@@ -60,9 +60,6 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {statCards.map((stat) => (
             <div key={stat.label} className={`bg-gradient-to-br ${stat.color} rounded-2xl p-6 relative overflow-hidden`}>
-              <div className="absolute top-0 right-0 opacity-10">
-                <stat.icon size={120} />
-              </div>
               <div className="relative z-10">
                 <p className="text-white/80 mb-2">{stat.label}</p>
                 <p className="text-5xl font-bold">{loading ? '...' : stat.value}</p>
@@ -99,7 +96,7 @@ const Dashboard = () => {
                       <Calendar size={24} />
                     </div>
                     <div>
-                      <h3 className="font-medium group-hover:text-disco-pink transition-colors">
+                      <h3 className="font-medium group-hover:text-disco-pink transition-colors line-clamp-1" title={registration.event.eventName}>
                         {registration.event.eventName}
                       </h3>
                       <p className="text-sm text-gray-400">

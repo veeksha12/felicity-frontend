@@ -35,7 +35,6 @@ const Events = () => {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      // Fetch all events without search query - we'll do fuzzy search client-side
       const response = await eventsAPI.browse({
         type: filters.type,
         eligibility: filters.eligibility,
@@ -65,7 +64,7 @@ const Events = () => {
         { name: 'eventTags', weight: 0.2 },
         { name: 'venue', weight: 0.1 }
       ],
-      threshold: 0.4, // 0.0 = perfect match, 1.0 = match anything
+      threshold: 0.4, 
       distance: 100,
       minMatchCharLength: 2,
       includeScore: true,
@@ -151,7 +150,7 @@ const Events = () => {
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search Bar with Fuzzy Search */}
             <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute left-1 top-1 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
                 placeholder="Search events by name, description, tags, or venue"
@@ -197,9 +196,9 @@ const Events = () => {
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${selectedTags.includes(tag)
-                  ? 'bg-disco-pink/20 text-disco-pink border border-disco-pink'
-                  : 'bg-white/5 text-gray-400 border border-white/10 hover:border-white/30'
+                className={`px-6 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${selectedTags.includes(tag)
+                  ? 'bg-disco-pink/20 text-disco-pink border border-disco-pink shadow-disco-sm'
+                  : 'bg-white/5 text-gray-400 border border-white/10 hover:border-white/30 hover:bg-white/10'
                   }`}
               >
                 {tag}

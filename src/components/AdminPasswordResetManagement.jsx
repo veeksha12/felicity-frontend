@@ -68,9 +68,6 @@ const AdminPasswordResetManagement = () => {
 
   const handleMarkViewed = async () => {
     try {
-      // If we have credentials, we need to mark them as viewed/cleared on backend
-      // Note: The backend endpoint typically handles clearing the password from DB
-      // We'll assume the user has copied it.
       setNewCredentials(null);
       loadRequests(); // Refresh to update status if needed
     } catch (error) {
@@ -114,7 +111,7 @@ const AdminPasswordResetManagement = () => {
           <div className="w-8 h-8 border-2 border-disco-cyan border-t-transparent rounded-full animate-spin" />
         </div>
       ) : requests.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="table-responsive">
           <table className="w-full">
             <thead className="bg-black/30">
               <tr>
