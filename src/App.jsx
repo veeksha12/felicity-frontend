@@ -46,14 +46,51 @@ function App() {
           <Navbar />
           <main className="flex-grow">
             <Routes>
+              {/* Protected Public-turned-Private Routes */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute allowedRoles={['Participant', 'Organizer', 'Admin']}>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/events"
+                element={
+                  <ProtectedRoute allowedRoles={['Participant', 'Organizer', 'Admin']}>
+                    <EventList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/events/:id"
+                element={
+                  <ProtectedRoute allowedRoles={['Participant', 'Organizer', 'Admin']}>
+                    <EventDetail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/clubs"
+                element={
+                  <ProtectedRoute allowedRoles={['Participant', 'Organizer', 'Admin']}>
+                    <Clubs />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/clubs/:id"
+                element={
+                  <ProtectedRoute allowedRoles={['Participant', 'Organizer', 'Admin']}>
+                    <ClubDetail />
+                  </ProtectedRoute>
+                }
+              />
+
               {/* Public Routes */}
-              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/events" element={<EventList />} />
-              <Route path="/events/:id" element={<EventDetail />} />
-              <Route path="/clubs" element={<Clubs />} />
-              <Route path="/clubs/:id" element={<ClubDetail />} />
 
               {/* Onboarding Route (Participant only) */}
               <Route
