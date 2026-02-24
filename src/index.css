@@ -1,0 +1,486 @@
+@import 'pixel-retroui/dist/index.css';
+@import 'pixel-retroui/dist/fonts.css';
+@import 'tailwindcss';
+
+/* Apply brown theme with enhancements */
+:root {
+  --retro-primary: var(--retro-brown-light);
+  --retro-primary-dark: var(--retro-brown-dark);
+  
+  /* Enhanced brown palette */
+  --brown-50: #fdf8f6;
+  --brown-100: #f2e8e5;
+  --brown-200: #e0cec7;
+  --brown-300: #bfa094;
+  --brown-400: #a18072;
+  --brown-500: #8B6F47;
+  --brown-600: #5C4033;
+  --brown-700: #43302b;
+  --brown-800: #3E2723;
+  
+  /* Accent colors */
+  --gold: #D4AF37;
+  --gold-light: #FFD700;
+  --cream: #F5E6D3;
+  --warm-tan: #D4A574;
+}
+
+@layer base {
+  * {
+    border-color: rgba(191, 160, 148, 0.3);
+  }
+  
+  body {
+    background: linear-gradient(135deg, #3E2723 0%, #43302b 50%, #000000 100%);
+    color: #F5E6D3;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Enhanced Disco Ball with brown tones */
+  .disco-ball {
+    background: conic-gradient(
+      from 0deg,
+      var(--brown-400) 0deg,
+      var(--gold) 90deg,
+      var(--brown-500) 180deg,
+      var(--warm-tan) 270deg,
+      var(--brown-400) 360deg
+    );
+    animation: disco-spin 3s linear infinite;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Enhanced Vinyl Record */
+  .vinyl-record {
+    background: radial-gradient(
+      circle at center,
+      var(--brown-600) 0%,
+      var(--brown-800) 40%,
+      var(--brown-600) 41%,
+      var(--brown-800) 100%
+    );
+    box-shadow: 
+      inset 0 0 0 5px rgba(212, 175, 55, 0.2),
+      0 0 50px rgba(139, 111, 71, 0.4),
+      0 0 80px rgba(212, 175, 55, 0.2);
+  }
+
+  /* Enhanced Neon Text with warm glow */
+  .neon-text {
+    text-shadow: 
+      0 0 7px var(--cream),
+      0 0 10px var(--cream),
+      0 0 21px var(--gold-light),
+      0 0 42px var(--gold),
+      0 0 82px var(--gold),
+      0 0 92px var(--warm-tan);
+  }
+
+  /* Enhanced Retro Button with brown theme */
+  .btn-retro {
+    position: relative;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #8B6F47 0%, #5C4033 100%);
+    border: 4px solid #F5E6D3;
+    border-radius: 0;
+    transform: scale(1);
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 4px 15px rgba(92, 64, 51, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  
+  .btn-retro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-retro:hover::before {
+    left: 100%;
+  }
+  
+  .btn-retro:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 6px 25px rgba(212, 175, 55, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #a18072 0%, #8B6F47 100%);
+  }
+  
+  .btn-retro:active {
+    transform: scale(0.95);
+  }
+
+  /* Enhanced Event Card */
+  .event-card {
+    background: linear-gradient(135deg, rgba(92, 64, 51, 0.6) 0%, rgba(62, 39, 35, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(212, 160, 116, 0.3);
+    border-radius: 1rem;
+    overflow: hidden;
+    transform: scale(1);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(62, 39, 35, 0.3);
+  }
+  
+  .event-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 8px 30px rgba(212, 175, 55, 0.4),
+      0 0 60px rgba(139, 111, 71, 0.2);
+  }
+
+  /* Enhanced Retro Grid Background */
+  .retro-grid {
+    background-image: 
+      linear-gradient(rgba(212, 175, 55, 0.15) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.15) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: -1px -1px;
+    position: relative;
+  }
+  
+  .retro-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(62, 39, 35, 0.5) 100%);
+    pointer-events: none;
+  }
+
+  /* Enhanced Glowing Border */
+  .glow-border {
+    position: relative;
+    border-radius: 1rem;
+  }
+
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--gold), var(--brown-400), var(--warm-tan), var(--gold-light));
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    animation: glow-rotate 3s linear infinite;
+    filter: blur(8px);
+  }
+
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes glow-rotate {
+    0% {
+      filter: blur(8px) hue-rotate(0deg);
+    }
+    100% {
+      filter: blur(8px) hue-rotate(360deg);
+    }
+  }
+
+  /* Enhanced Film Strip */
+  .film-strip {
+    position: relative;
+    border-left: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+    padding: 15px;
+    background: rgba(62, 39, 35, 0.3);
+  }
+
+  .film-strip::before,
+  .film-strip::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--gold) 0px,
+      var(--gold) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    left: 0;
+  }
+
+  .film-strip::before {
+    top: 0;
+  }
+
+  .film-strip::after {
+    bottom: 0;
+  }
+
+  /* Enhanced Loading Spinner */
+  .spinner {
+    border: 4px solid rgba(212, 175, 55, 0.2);
+    border-top: 4px solid var(--gold);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Enhanced Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--brown-800);
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--brown-500), var(--brown-600));
+    border-radius: 6px;
+    border: 2px solid var(--brown-800);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--gold), var(--brown-400));
+  }
+
+  /* Enhanced Marquee Animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Enhanced Pulse Animation */
+  @keyframes pulse-live {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+    }
+  }
+
+  .pulse-live {
+    animation: pulse-live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Enhanced gradient disco animation */
+  @keyframes disco-spin {
+    0% { 
+      transform: rotate(0deg) scale(1);
+      filter: brightness(1);
+    }
+    25% {
+      filter: brightness(1.2);
+    }
+    50% { 
+      transform: rotate(180deg) scale(1.05);
+      filter: brightness(1);
+    }
+    75% {
+      filter: brightness(1.2);
+    }
+    100% { 
+      transform: rotate(360deg) scale(1);
+      filter: brightness(1);
+    }
+  }
+  
+  /* Float animation */
+  @keyframes float {
+    0%, 100% { 
+      transform: translateY(0px);
+      opacity: 0.7;
+    }
+    50% { 
+      transform: translateY(-20px);
+      opacity: 1;
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Enhanced text gradient */
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(135deg, var(--gold-light) 0%, var(--warm-tan) 50%, var(--gold) 100%);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  /* Enhanced glass effect */
+  .bg-glass {
+    background: rgba(92, 64, 51, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(62, 39, 35, 0.3),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Enhanced shadow effects */
+  .shadow-disco {
+    box-shadow: 
+      0 0 20px rgba(212, 175, 55, 0.3),
+      0 10px 40px rgba(62, 39, 35, 0.4);
+  }
+  
+  .shadow-elegant {
+    box-shadow: 
+      0 20px 60px -10px rgba(62, 39, 35, 0.4),
+      0 0 40px rgba(212, 175, 55, 0.1);
+  }
+  
+  /* Gradient backgrounds */
+  .bg-gradient-disco {
+    background: linear-gradient(135deg, var(--brown-500) 0%, var(--brown-600) 50%, var(--brown-700) 100%);
+  }
+  
+  .bg-gradient-warm {
+    background: linear-gradient(to right, var(--warm-tan), var(--brown-400), var(--brown-500));
+  }
+  
+  .bg-gradient-gold {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  }
+}
+
+/* Enhanced React Hot Toast Styling */
+.toast-success {
+  background: linear-gradient(135deg, var(--brown-500) 0%, var(--brown-600) 100%) !important;
+  color: var(--cream) !important;
+  border: 2px solid var(--gold) !important;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3) !important;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3) !important;
+}
+
+/* Additional enhancements */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.25);
+}
+
+/* Input enhancements */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--gold) !important;
+  box-shadow: 
+    0 0 0 3px rgba(212, 175, 55, 0.1),
+    0 0 20px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* Link enhancements */
+a {
+  transition: color 0.2s ease;
+}
+
+/* Button secondary style */
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  background: rgba(92, 64, 51, 0.2);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  background: rgba(92, 64, 51, 0.4);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+/* Badge styles */
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold-light);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Card with soft shadow */
+.card-soft {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background: rgba(92, 64, 51, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 4px 20px rgba(62, 39, 35, 0.2);
+}
+
+.card-soft:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.25);
+}
